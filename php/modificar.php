@@ -1,25 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Modificar</title>
-</head>
-<body>
-<h1>Modificar</h1>
-
 <?php
-$codigo = $_POST['codigo'];
+
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
-echo "El codigo del estudiante es: <b>" . $codigo . "</b> <br>";
-echo "El nombre del estudiante es: <b>" . $nombre . " ". $apellido. "</b>";
+$codigo = $_POST['codigo'];
+echo "El codigo  es: " . $codigo . " ";
+echo "El nombre es: " . $nombre . " ". $apellido. " ";
 ?>
+<!-- Es necesario neter el php en el html? -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Registro</title>
+</head>
+
+<body>
+<h1>Modificar Registro</h1>
 
 <form>
-    <p> Actividad: <input type="text" name="actividad">
-        Nota: <input type="number" name="nota">
-        <input type="submit" value="Guardar">
-    </p>
+    
+    <div>
+        Activity:
+        <input type="text" name="actividad">
+        Nota:
+        <input type="number" name="nota">
+        <br>
+        <button type="submit" value="Guardar" >Guardar</button>
+    </div>
 </form>
 </body>
 </html>
