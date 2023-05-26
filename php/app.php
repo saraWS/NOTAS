@@ -13,15 +13,17 @@
     $codigo = $_POST['codigo'];
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
-    echo "El codigo del estudiante es: <b>" . $codigo . "</b> <br>";
-    echo "El nombre del estudiante es: <b>" . $nombre . " " . $apellido . "</b>";
+    echo "El codigo :" . $codigo . " ";
+    echo "El nombre :" . $nombre . " " . $apellido . " ";
     ?>
 
     <form action="modificar.php" method="post">
-        <p> Actividad: <input type="text" name="actividad">
-            Nota: <input type="number" name="nota">
-            <input type="submit" value="Modificar">
-            <input type="submit" value="Agregar">
+        <p> Actividad: 
+            <input type="text" name="actividad">
+            Nota: 
+            <input type="number" name="nota">
+            <button  type="submit" value="Modificar"></button>
+            <button  type="submit" value="Agregar"></button>
         </p>
     </form>
 
