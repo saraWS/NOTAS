@@ -2,19 +2,19 @@
 require '../Modelo/estudiantes.php';
 require '../Controlador/conexionDbController.php';
 require '../Controlador/baseController.php';
-require '../Controlador/usuariosController.php';
+require '../Controlador/estudiantesController.php';
 
 use estudiantes\Estudiantes;
-use usuarioController\UsuarioController;
+use estudiantesController\EstudiantesController;
 
-$usuario = new Usuario();//Se le asigna el valor a los datos, el valor de las variables se esta guardadndo en un objeto
-$usuario->setId($_POST['id']);
-$usuario->setName($_POST['name']);
-$usuario->setUsername($_POST['username']);
-$usuario->setPassword($_POST['password']);
+$estudiantes = new Estudiantes();//Se le asigna el valor a los datos, el valor de las variables se esta guardadndo en un objeto
+$estudiantes->setId($_POST['id']);
+$estudiantes->setName($_POST['name']);
+$estudiantes->setUsername($_POST['username']);
+$estudiantes->setPassword($_POST['password']);
 
-$usuarioController = new UsuarioController();//Para enviar datos a la funcion(en susuariosController)
-$resultado = $usuarioController->create($usuario);
+$estudiantesController = new EstudiantesController(); //Para enviar datos a la funcion(en susuariosController)
+$resultado = $estudiantesController->create($estudiantes);
 if ($resultado) {
     echo '<h1>Usuarios registrado</h1>';
 } else {
