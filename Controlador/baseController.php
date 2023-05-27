@@ -1,4 +1,5 @@
-<?php namespace baseControler;
+<?php 
+namespace baseControler;
 
 abstract class BaseController
 {

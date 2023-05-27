@@ -11,7 +11,7 @@ class EstudiantesController extends BaseController
     //La funcion que se invoca en el formulario
     //EStas funciones estan definidas en usuario.php
     //botones
-    function crea ($estudiantes)
+    function create ($estudiantes)
     {
         $sql = 'insert into estudiantes ';
         $sql .= '(id,name,username,password) values vavalues ';
@@ -32,7 +32,7 @@ class EstudiantesController extends BaseController
         $sql = 'select * from estudiantes';
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
-        $estudiante = [];
+        $estudiantes = [];
         while ($registro = $resultadoSQL->fetch_assoc()) {
             $estudiantes = new Estudiantes();
             $estudiantes->setId($registro['id']);

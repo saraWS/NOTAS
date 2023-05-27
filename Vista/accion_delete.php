@@ -1,13 +1,13 @@
 <?php
-require '../models/usuario.php';
-require '../controllers/conexionDbController.php';
-require '../controllers/baseController.php';
-require '../controllers/usuariosController.php';
+require '../Modelo/estudiantes.php';
+require '../Controlador/conexionDbController.php';
+require '../Controlador/baseController.php';
+require '../Controlador/estudiantesController.php';
 
-use usuarioController\UsuarioController;
+use estudiantesController\EstudiantesController;
 
-$usuarioController = new UsuarioController();
-$resultado = $usuarioController->delete($_GET['id']);
+$estudiantesController = new EstudiantesController();
+$resultado = $estudiantesController->delete($_GET['id']);
 if ($resultado) {
     echo '<h1>Usuario borrado</h1>';
 } else {

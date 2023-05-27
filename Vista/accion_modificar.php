@@ -1,20 +1,20 @@
 <?php
-require '../models/usuario.php';
-require '../controllers/conexionDbController.php';
-require '../controllers/baseController.php';
-require '../controllers/usuariosController.php';
+require '../Modelos/estudiantes.php';
+require '../Controlador/conexionDbController.php';
+require '../Controlador/baseController.php';
+require '../controllers/estudiantesController.php';
 ///Se debe modificar unicamente las notas, y la descripcion
-use usuario\Usuario;
-use usuarioController\UsuarioController;
+use estudiantes\Estudiantes;
+use estudiantesController\EstudiantesController;
 
-$usuario = new Usuario();
-$usuario->setId($_POST['id']);
-$usuario->setName($_POST['name']);
-$usuario->setUsername($_POST['username']);
-$usuario->setPassword($_POST['password']);
+$estudiantes = new Estudiantes();
+$estudiantes->setId($_POST['id']);
+$estudiantes->setName($_POST['name']);
+$estudiantes->setUsername($_POST['username']);
+$estudiantes->setPassword($_POST['password']);
 
-$usuarioController = new UsuarioController();
-$resultado = $usuarioController->update($usuario->getId(),$usuario);
+$estudiantesController = new EstudiantesController();
+$resultado = $estudiantesController->update($estudiantes->getId(),$estudiantes);
 if ($resultado) {
     echo '<h1>Usuarios modificado</h1>';
 } else {

@@ -8,7 +8,7 @@ use estudiantes\Estudiantes;
 use estudiantesController\EstudiantesController;
 
 $id= empty($_GET['id']) ? '' : $_GET['id'];
-$titulo= 'Registrar Estudiante'
+$titulo= 'Registrar Estudiante';
 $urlAction = "accion_registro.php";
 $estudiantes = new Estudiantes();
 if (!empty($id)){
