@@ -11,20 +11,24 @@ class EstudiantesController extends BaseController
     //La funcion que se invoca en el formulario
     //EStas funciones estan definidas en usuario.php
     //botones
-    function create ($estudiantes)
+    function create ($estudiantes)//accion registro
     {
         $sql = 'insert into estudiantes ';
-        $sql .= '(id,name,username,password) values vavalues ';
+        $sql .= '(codigo,nombres,apellidos) values ';
         $sql .= '(';
-        $sql .= $estudiantes->getId() . ',';
-        $sql .= '"' . $estudiantes->getName() .'';
-        $sql .= '"' . $estudiantes->getUsername() . '",';
-        $sql .= '"' . $estudiantes->getPassword() . '"';
+        $sql .= $estudiantes->getCodigo() . ',';
+        $sql .= '"' . $estudiantes->getNombres() .'",';
+        $sql .= '"' . $estudiantes->getApellidos() . '"';
         $sql .= ')';
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);//este metodo es el que me da la respuesta(execSQL), pa ver si hay errores
         $conexiondb->close();
         return $resultadoSQL;
+         if($resultadoSQL){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     function read()
@@ -32,52 +36,51 @@ class EstudiantesController extends BaseController
         $sql = 'select * from estudiantes';
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
-        $estudiantes = [];
+        $estudiante = [];
         while ($registro = $resultadoSQL->fetch_assoc()) {
             $estudiantes = new Estudiantes();
-            $estudiantes->setId($registro['id']);
-            $estudiantes->setName($registro['name']);
-            $estudiantes->setUsername($registro['username']);
-            $estudiantes->setPassword('');
+            $estudiantes->setCodigo($registro['codigo']);
+            $estudiantes->setNombres($registro['name']);
+            $estudiantes->setApellidos($registro['apellido']);
             array_push($estudiante, $estudiantes);
         }
         $conexiondb->close();
-        return $estudiantes;
+        return $estudiante;
     }
+
     
-    function readRow($id)//se usa para buscar un valor
+    
+    function readRow($codigo)//se usa para buscar un valor
     {
         $sql = 'select * from estudiantes';
-        $sql .= ' where id='.$id;
+        $sql .= ' where codigo='.$codigo;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $estudiantes = new Estudiantes();
         while ($registro = $resultadoSQL->fetch_assoc()) {
-            $estudiantes->setId($registro['id']);
-            $estudiantes->setName($registro['name']);
-            $estudiantes->setUsername($registro['username']);
-            $estudiantes->setPassword('');
+            $estudiantes->setCodigo($registro['codigo']);
+            $estudiantes->setNombres($registro['name']);
+            $estudiantes->setApellidos($registro['apellido']);
         }
         $conexiondb->close();
         return $estudiantes;
     }
 
-    function update($id, $estudiantes)
+    function update($codigo, $estudiantes)//accion modificar
     {
         $sql = 'update estudiantes set ';
-        $sql .= 'name='.$estudiantes->getName().'",';
-        $sql .= 'username='.$estudiantes->getUsername().'",';
-        $sql .= 'password='.$estudiantes->getPassword().'" ';
-        $sql .= ' where id='.$id;
+        $sql .= 'name='.$estudiantes->getNombres().'",';
+        $sql .= 'apellido='.$estudiantes->getApellidios().'" ';
+        $sql .= ' where codigo='.$codigo;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();
         return $resultadoSQL;
     }
 
-    function delete($id)
+    function delete($codigo)
     {
-        $sql = 'delete from estudiantes where id=' . $id;
+        $sql = 'delete from estudiantes where codigo=' . $codigo;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();

@@ -5,44 +5,34 @@ namespace estudiantes;
 class Estudiantes
 {
     //Atributos que estan en la base de datos:
-    private $id;
-    private $username;
-    private $password;
-    private $name;
+    private $codigo;
+    private $nombres;
+    private $apellidos;
 
-    public function getId()
+    public function getCodigo()
     {
-        return $this->id;
+        return $this->codigo;
     }
-    public function setId($value)
+    public function setCodigo($value)
     {
-        $this->id = $value;
-    }
-
-    public function getUsername()
-    {
-        return $this->username;
-    }
-    public function setUsername($value)
-    {
-        $this->username = $value;
-    }
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    public function setPassword($value)
-    {
-        $this->password = $value;
+        $this->codigo = $value;
     }
 
+    public function getNombres()
+    {
+        return $this->nombres;
+    }
+    public function setNombres($value)
+    {
+        $this->nombres = $value;
+    }
     
-    public function getName()
+    public function getApellidos()
     {
-        return $this->name;
+        return $this->apellidos;
     }
-    public function setName($value)
+    public function setApellidos($value)
     {
-        $this->name = $value;
+        $this->apellidos = $value;
     }
 }

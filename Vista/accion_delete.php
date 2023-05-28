@@ -7,7 +7,7 @@ require '../Controlador/estudiantesController.php';
 use estudiantesController\EstudiantesController;
 
 $estudiantesController = new EstudiantesController();
-$resultado = $estudiantesController->delete($_GET['id']);
+$resultado = $estudiantesController->delete($_GET['codigo']);
 if ($resultado) {
     echo '<h1>Usuario borrado</h1>';
 } else {

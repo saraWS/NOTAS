@@ -7,18 +7,18 @@ require '../Controlador/estudiantesController.php';
 use estudiantes\Estudiantes;
 use estudiantesController\EstudiantesController;
 
-$id= empty($_GET['id']) ? '' : $_GET['id'];
+$codigo= empty($_GET['codigo']) ? '' : $_GET['codigo'];
 $titulo= 'Registrar Estudiante';
 $urlAction = "accion_registro.php";
 $estudiantes = new Estudiantes();
-if (!empty($id)){
+if (!empty($codigo)){
     $titulo ='Modificar Estudiante';
     $urlAction = "accion_modificar.php";
     $estudiantesController = new EstudiantesController();
-    $estudiantes = $estudiantesController->readRow($id);
+    $estudiantes = $estudiantesController->readRow($codigo);
 }
 ?>
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,23 +31,18 @@ if (!empty($id)){
     <h1><?php echo $titulo; ?></h1>
     <form action="<?php echo $urlAction;?>" method="post">
         <label>
-            <span>Id:</span>
-            <input type="number" name="id" min="1" value="<?php echo $usuario->getId(); ?>" required>
+            <span>Codigo:</span>
+            <input type="number" name="codigo" min="1" value="<?php echo $estudiantes->getCodigo(); ?>" required>
         </label>
         <br>
         <label>
             <span>Nombre:</span>
-            <input type="text" name="name" value="<?php echo $usuario->getName(); ?>" required>
+            <input type="text" name="name" value="<?php echo $estudiantes->getNombres(); ?>" required>
         </label>
         <br>
         <label>
-            <span>Usuario:</span>
-            <input type="text" name="username" value="<?php echo $usuario->getUsername(); ?>" required>
-        </label>
-        <br>
-        <label>
-            <span>Contraseña:</span>
-            <input type="password" name="password" required>
+            <span>Apellido:</span>
+            <input type="text" name="apellido" value="<?php echo $estudiantes->getApellidos(); ?>" required>
         </label>
         <br>
         <button type="submit">Guardar</button>

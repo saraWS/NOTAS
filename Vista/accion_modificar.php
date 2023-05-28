@@ -8,13 +8,12 @@ use estudiantes\Estudiantes;
 use estudiantesController\EstudiantesController;
 
 $estudiantes = new Estudiantes();
-$estudiantes->setId($_POST['id']);
-$estudiantes->setName($_POST['name']);
-$estudiantes->setUsername($_POST['username']);
-$estudiantes->setPassword($_POST['password']);
+$estudiantes->setCodigo($_POST['codigo']);
+$estudiantes->setNombres($_POST['name']);
+$estudiantes->setApellidos($_POST['apellido']);
 
 $estudiantesController = new EstudiantesController();
-$resultado = $estudiantesController->update($estudiantes->getId(),$estudiantes);
+$resultado = $estudiantesController->update($estudiantes->getCodigo(),$estudiantes);
 if ($resultado) {
     echo '<h1>Usuarios modificado</h1>';
 } else {
