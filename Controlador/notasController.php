@@ -1,27 +1,26 @@
 <?php
-// En el controller se definen las funciones creadas en el base controller
-namespace estudiantesController;
+
+namespace notasController;
 
 use baseControler\BaseController;
 use conexionDb\ConexionDbController;
-use estudiantes\Estudiantes;
+use actividades\Actividades;
 
-class EstudiantesController extends BaseController
+class NotasController extends BaseController
 {
-    //La funcion que se invoca en el formulario
-    //EStas funciones estan definidas en usuario.php
-    //botones
-    function create ($estudiantes)//accion registro
+   
+    function create ($actividad)
     {
-        $sql = 'insert into estudiantes ';
+        $sql = 'insert into actividades ';
         $sql .= '(codigo,nombres,apellidos) values ';
         $sql .= '(';
-        $sql .= $estudiantes->getCodigo() . ',';
-        $sql .= '"' . $estudiantes->getNombres() .'",';
-        $sql .= '"' . $estudiantes->getApellidos() . '"';
+        $sql .= $actividad->getId() . ',';
+        $sql .= '"' . $actividad->getDescripcion() .'",';
+        $sql .= '"' . $actividad->getNota() .'",';
+        $sql .= '"' . $actividad->getCodigoEstudiante() . '"';
         $sql .= ')';
         $conexiondb = new ConexionDbController();
-        $resultadoSQL = $conexiondb->execSQL($sql);//este metodo es el que me da la respuesta(execSQL), pa ver si hay errores
+        $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();
         return $resultadoSQL;
          if($resultadoSQL){
@@ -33,19 +32,20 @@ class EstudiantesController extends BaseController
 
     function read()
     {
-        $sql = 'select * from estudiantes';
+        $sql = 'select * from actividades';
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
-        $estudiante = [];
+        $actividades = [];
         while ($registro = $resultadoSQL->fetch_assoc()) {
-            $estudiantes = new Estudiantes();
-            $estudiantes->setCodigo($registro['codigo']);
-            $estudiantes->setNombres($registro['name']);
-            $estudiantes->setApellidos($registro['apellido']);
-            array_push($estudiante, $estudiantes);
+            $actividad = new Actividades();
+            $actividad->setId($registro['codigo']);
+            $actividad->setDescripcion($registro['name']);
+            $actividad->setNota($registro['apellido']);
+            $actividad->setCodigoEstudiante($registro['apellido']);
+            array_push($actividades, $actividad);
         }
         $conexiondb->close();
-        return $estudiante;
+        return $actividades;
     }
 
     

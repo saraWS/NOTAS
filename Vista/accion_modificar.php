@@ -1,8 +1,8 @@
 <?php
-require '../Modelos/estudiantes.php';
+require '../Modelo/estudiantes.php';
 require '../Controlador/conexionDbController.php';
 require '../Controlador/baseController.php';
-require '../controllers/estudiantesController.php';
+require '../controlador/estudiantesController.php';
 ///Se debe modificar unicamente las notas, y la descripcion
 use estudiantes\Estudiantes;
 use estudiantesController\EstudiantesController;

@@ -8,6 +8,6 @@ abstract class BaseController
     abstract function read();
     abstract function update($codigo, $estudiantes);
     abstract function delete($codigo);
-  //  abstract function readRow($id);
+    //abstract function readRow($id);
 
 }
