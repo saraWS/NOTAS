@@ -1,21 +1,21 @@
 <?php
-require '../Modelo/estudiantes.php';
+require '../Modelo/actividades.php';
 require '../Controlador/conexionDbController.php';
 require '../Controlador/baseController.php';
-require '../Controlador/estudiantesController.php';
+require '../Controlador/notasController.php';
 
-use estudiantes\Estudiantes;
-use estudiantesController\EstudiantesController;
+use actividades\Actividades;
+use notasController\NotasController;
 
-$codigo= empty($_GET['codigo']) ? '' : $_GET['codigo'];
-$titulo= 'Registrar Estudiante';
-$urlAction = "accion_registro.php";
-$estudiantes = new Estudiantes();
-if (!empty($codigo)){
-    $titulo ='Modificar Estudiante';
-    $urlAction = "accion_modificar.php";
-    $estudiantesController = new EstudiantesController();
-    $estudiantes = $estudiantesController->readRow($codigo);
+$id= empty($_GET['id']) ? '' : $_GET['id'];
+$titulo= 'Ingresar Nota';
+$urlAction = "accion_reg_notas.php";
+$actividad = new Actividades();
+if (!empty($id)){
+    $titulo ='Modificar Nota';
+    $urlAction = "accion_modif_notas.php";
+    $notasController = new NotasController();
+    $actividad = $notasController->readRow($id);
 }
 ?>
 
@@ -32,21 +32,21 @@ if (!empty($codigo)){
     <form action="<?php echo $urlAction;?>" method="post">
         <label>
             <span>Id:</span>
-            <input type="number" name="id" min="1" value="<?php echo $estudiantes->getCodigo(); ?>" required>
+            <input type="number" name="id" min="1" value="<?php echo $actividad->getId(); ?>" required>
         </label>
         <br>
         <label>
             <span>Descripcion:</span>
-            <input type="text" name="descripcion" value="<?php echo $estudiantes->getNombres(); ?>" required>
+            <input type="text" name="descripcion" value="<?php echo $actividad->getDescripcion(); ?>" required>
         </label>
         <br>
         <label>
             <span>Nota:</span>
-            <input type="text" name="nota" value="<?php echo $estudiantes->getApellidos(); ?>" required>
+            <input type="number" name="nota" value="<?php echo $actividad->getNota(); ?>" required>
         </label>
         <label>
             <span>Codigo del estudiante:</span>
-            <input type="number" name="codigoEstudiante" value="<?php echo $estudiantes->getApellidos(); ?>" required>
+            <input type="text" name="codigoEstudiante" value="<?php echo $actividad->getCodigoEstudiante(); ?>" required>
         </label>
         <br>
         <button type="submit">Guardar</button>

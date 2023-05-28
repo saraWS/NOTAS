@@ -1,22 +1,23 @@
 <?php
-<?php
-require '../models/actividad.php';
-require '../controllers/conexionDbController.php';
-require '../controllers/baseController.php';
-require '../controllers/notaController.php';
+require '../Modelo/actividades.php';
+require '../Controlador/conexionDbController.php';
+require '../Controlador/baseController.php';
+require '../controlador/notasController.php';
 
+///Se debe modificar unicamente las notas, y la descripcion
 use actividades\Actividades;
-use notaController\NotaController;
+use notasController\NotasController;
 
-$actividades = new Actividades();
-$actividades->setId($_POST['id']);
-$actividades->setDescripcion($_POST['descripcion']);
-$actividades->setNota($_POST['nota']);
+$actividad = new Actividades();
+$actividad->setId($_POST['id']);
+$actividad->setDescripcion($_POST['descripcion']);
+$actividad->setNota($_POST['nota']);
+$actividad->setCodigoEstudiante($_POST['codigoEstudiante']);
 
-$notaController = new NotaController();
-$resultado = $notaController->update($actividades->getId(),$actividades);
+$notasController = new NotasController();
+$resultado = $notasController->update($actividad->getId(),$actividad);
 if ($resultado) {
-    echo '<h1>nota modificada</h1>';
+    echo '<h1>Nota modificada</h1>';
 } else {
     echo '<h1>No se pudo modificar la nota</h1>';
 }

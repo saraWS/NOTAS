@@ -12,7 +12,7 @@ class NotasController extends BaseController
     function create ($actividad)
     {
         $sql = 'insert into actividades ';
-        $sql .= '(codigo,nombres,apellidos) values ';
+        $sql .= '(id,descripcion,nota,codigoEstudiante) values ';
         $sql .= '(';
         $sql .= $actividad->getId() . ',';
         $sql .= '"' . $actividad->getDescripcion() .'",';
@@ -38,10 +38,10 @@ class NotasController extends BaseController
         $actividades = [];
         while ($registro = $resultadoSQL->fetch_assoc()) {
             $actividad = new Actividades();
-            $actividad->setId($registro['codigo']);
-            $actividad->setDescripcion($registro['name']);
-            $actividad->setNota($registro['apellido']);
-            $actividad->setCodigoEstudiante($registro['apellido']);
+            $actividad->setId($registro['id']);
+            $actividad->setDescripcion($registro['descripcion']);
+            $actividad->setNota($registro['nota']);
+            $actividad->setCodigoEstudiante($registro['codigoEstudiante']);
             array_push($actividades, $actividad);
         }
         $conexiondb->close();
@@ -50,28 +50,30 @@ class NotasController extends BaseController
 
     
     
-    function readRow($codigo)//se usa para buscar un valor
+    function readRow($id)//se usa para buscar un valor
     {
-        $sql = 'select * from estudiantes';
-        $sql .= ' where codigo='.$codigo;
+        $sql = 'select * from actividades';
+        $sql .= ' where id='.$id;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
-        $estudiantes = new Estudiantes();
+        $actividad = new Actividades();
         while ($registro = $resultadoSQL->fetch_assoc()) {
-            $estudiantes->setCodigo($registro['codigo']);
-            $estudiantes->setNombres($registro['name']);
-            $estudiantes->setApellidos($registro['apellido']);
+            $actividad->setId($registro['id']);
+            $actividad->setDescripcion($registro['descripcion']);
+            $actividad->setNota($registro['nota']);
+            $actividad->setCodigoEstudiante($registro['codigoEstudiante']);
         }
         $conexiondb->close();
-        return $estudiantes;
+        return $actividad;
     }
 
-    function update($codigo, $estudiantes)//accion modificar
+    function update($id, $actividad)//accion modificar
     {
         $sql = 'update estudiantes set ';
-        $sql .= 'name='.$estudiantes->getNombres().'",';
-        $sql .= 'apellido='.$estudiantes->getApellidos().'"';
-        $sql .= ' where codigo='.$codigo;
+        $sql .= 'descripcion='.$actividad->getDescripcion().'",';
+        $sql .= 'nota='.$actividad->getNota().'",';
+        $sql .= 'codigoEstudiante='.$actividad->getCodigoEstudiantes().'"';
+        $sql .= ' where id='.$id;
         echo $sql;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
@@ -80,9 +82,9 @@ class NotasController extends BaseController
         
     }
 
-    function delete($codigo)
+    function delete($id)
     {
-        $sql = 'delete from estudiantes where codigo=' . $codigo;
+        $sql = 'delete from actividades where id=' . $id;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();

@@ -1,14 +1,14 @@
 <?php
-require 'Modelo/estudiantes.php';
+require 'Modelo/actividades.php';
 require 'Controlador/conexionDbController.php';
 require 'Controlador/baseController.php';
-require 'Controlador/estudiantesController.php';
+require 'Controlador/notasController.php';
 
-use estudiantesController\EstudiantesController;
+use notasController\NotasController;
 
-$estudiantesController = new EstudiantesController();
+$notasController = new NotasController();
 
-$estudiante = $estudiantesController->read();
+$actividades = $notasController->read();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,27 +20,28 @@ $estudiante = $estudiantesController->read();
 
 <body>
     <main>
-        <h1>Lista estudiantes</h1>
-        <a href="Vista/form.php">Nuevo</a>
+        <h1>Lista Notas</h1>
+        <a href="Vista/form_notas.php">Ingresar nueva nota</a>
         <table>
             <thead>
                 <tr>
-                    <th>Codigo</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
+                    <th>Id</th>
+                    <th>Descripcion</th>
+                    <th>nota</th>
+                    <th>codigoEstudiante</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($estudiante as $estudiantes) {
+                foreach ($actividades as $actividad) {
                     echo '<tr>';
-                    echo '  <td>' . $estudiantes->getCodigo() . '</td>';
-                    echo '  <td>' . $estudiantes->getNombres() . '</td>';
-                    echo '  <td>' . $estudiantes->getApellidos() . '</td>';
+                    echo '  <td>' . $actividad->getId() . '</td>';
+                    echo '  <td>' . $actividad->getDescripcion() . '</td>';
+                    echo '  <td>' . $actividad->getNota() . '</td>';
+                    echo '  <td>' . $actividad->getCodigoEstudiante() . '</td>';
                     echo '  <td>';
-                    echo '      <a href="index_notas.php?codigo=' . $estudiantes->getCodigo() . '">NOTAS</a>';
-                    echo '      <a href="Vista/form.php?codigo=' . $estudiantes->getCodigo() . '">modificar</a>';
-                    echo '      <a href="Vista/accion_delete.php?codigo=' . $estudiantes->getCodigo() . '">borrar</a>';
+                    echo '      <a href="Vista/form_notas.php?id=' . $actividad->getId() . '">modificar</a>';
+                    echo '      <a href="Vista/accion_delete_notas.php?id=' . $actividad->getId() . '">borrar</a>';
                     echo '  </td>';
                     echo '</tr>';
                 }
