@@ -40,8 +40,8 @@ class EstudiantesController extends BaseController
         while ($registro = $resultadoSQL->fetch_assoc()) {
             $estudiantes = new Estudiantes();
             $estudiantes->setCodigo($registro['codigo']);
-            $estudiantes->setNombres($registro['name']);
-            $estudiantes->setApellidos($registro['apellido']);
+            $estudiantes->setNombres($registro['nombres']);
+            $estudiantes->setApellidos($registro['apellidos']);
             array_push($estudiante, $estudiantes);
         }
         $conexiondb->close();
@@ -59,8 +59,8 @@ class EstudiantesController extends BaseController
         $estudiantes = new Estudiantes();
         while ($registro = $resultadoSQL->fetch_assoc()) {
             $estudiantes->setCodigo($registro['codigo']);
-            $estudiantes->setNombres($registro['name']);
-            $estudiantes->setApellidos($registro['apellido']);
+            $estudiantes->setNombres($registro['nombres']);
+            $estudiantes->setApellidos($registro['apellidos']);
         }
         $conexiondb->close();
         return $estudiantes;
@@ -89,3 +89,4 @@ class EstudiantesController extends BaseController
         return $resultadoSQL;
     }
 }
+

@@ -19,7 +19,7 @@ class ConexionDbController
 
     function execSQL($sql)
     {
-        return $this->conex->query($sql);
+        return $this->conex->query($sql);//
     }
 
     function close()

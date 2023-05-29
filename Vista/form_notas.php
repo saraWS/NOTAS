@@ -44,6 +44,7 @@ if (!empty($id)){
             <span>Nota:</span>
             <input type="number" name="nota" value="<?php echo $actividad->getNota(); ?>" required>
         </label>
+        <br>
         <label>
             <span>Codigo del estudiante:</span>
             <input type="text" name="codigoEstudiante" value="<?php echo $actividad->getCodigoEstudiante(); ?>" required>

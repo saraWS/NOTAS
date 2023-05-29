@@ -48,6 +48,12 @@ $actividades = $notasController->read();
                 ?>
             </tbody>
         </table>
+        <div>
+            <tr>
+                <br>
+                <th>PROMEDIO:</th>
+            </tr>
+        </div>
     </main>
 </body>
 
