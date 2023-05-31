@@ -2,11 +2,10 @@
 
 namespace notasController;
 
-use baseControler\BaseController;
 use conexionDb\ConexionDbController;
 use actividades\Actividades;
 
-class NotasController extends BaseController
+class NotasController 
 {
    
     function create ($actividad)
@@ -14,20 +13,17 @@ class NotasController extends BaseController
         $sql1 = 'insert into actividades ';
         $sql1 .= '(id,descripcion,nota,codigoEstudiante) values ';
         $sql1 .= '(';
-        $sql1 .= $actividad->getId() . ',';
+        $sql1 .= '"' . $actividad->getId() .'",';
         $sql1 .= '"' . $actividad->getDescripcion() .'",';
         $sql1 .= '"' . $actividad->getNota() .'",';
         $sql1 .= '"' . $actividad->getCodigoEstudiante() . '"';
         $sql1 .= ')';
+        
         $conexiondb = new ConexionDbController();
         $resultadoSQL1 = $conexiondb->execSQL($sql1);//
         $conexiondb->close();
+
         return $resultadoSQL1;
-         if($resultadoSQL1){
-            return true;
-        }else{
-            return false;
-        }
     }
 
     function readRow($id)
@@ -47,9 +43,9 @@ class NotasController extends BaseController
         return $actividades;
     }
 
-    function read()
+    function read($codigo)
     {
-        $sql1 = 'select * from actividades';
+        $sql1 = 'select * from actividades where codigoEstudiante ='.$codigo;
         $conexiondb = new ConexionDbController();
         $resultadoSQL1 = $conexiondb->execSQL($sql1);
         $actividades = [];
@@ -68,12 +64,10 @@ class NotasController extends BaseController
 
     function update($id, $actividad)//accion modificar
     {
-        $sql1 = 'update estudiantes set ';
-        $sql1 .= 'descripcion='.$actividad->getDescripcion().'",';
-        $sql1 .= 'nota='.$actividad->getNota().'",';
-        $sql1 .= 'codigoEstudiante='.$actividad->getCodigoEstudiante().'"';
+        $sql1 = 'update actividades set ';
+        $sql1 .= 'descripcion= "'.$actividad->getDescripcion().'",';
+        $sql1 .= 'nota= "'.$actividad->getNota().'"';
         $sql1 .= ' where id='.$id;
-        echo $sql1;
         $conexiondb = new ConexionDbController();
         $resultadoSQL1 = $conexiondb->execSQL($sql1);
         $conexiondb->close();

@@ -12,7 +12,6 @@ $actividad = new Actividades();
 $actividad->setId($_POST['id']);
 $actividad->setDescripcion($_POST['descripcion']);
 $actividad->setNota($_POST['nota']);
-$actividad->setCodigoEstudiante($_POST['codigoEstudiante']);
 
 $notasController = new NotasController();
 $resultado = $notasController->update($actividad->getId(),$actividad);

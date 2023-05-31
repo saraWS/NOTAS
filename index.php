@@ -41,11 +41,11 @@ $estudiante = $estudiantesController->read();
                     echo '  <td>';
                     echo '      <a href="Vista/form.php?codigo=' . $estudiantes->getCodigo() . '">modificar</a>';
                     echo '      <a href="Vista/accion_delete.php?codigo=' . $estudiantes->getCodigo() . '">borrar</a>';
+                    echo '      <a href="index_notas.php?codigo=' . $estudiantes->getCodigo() . '">NOTAS ESTUDIANTES</a>';
                     echo '  </td>';
                     echo '</tr>';
                 }
-                
-                    echo '      <a href="index_notas.php?codigo=' . $estudiantes->getCodigo() . '">NOTAS ESTUDIANTES</a>';
+    
                 ?>
             </tbody>
         </table>

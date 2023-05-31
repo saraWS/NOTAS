@@ -4,12 +4,15 @@ require 'Controlador/conexionDbController.php';
 require 'Controlador/baseController.php';
 require 'Controlador/notasController.php';
 
+use actividades\Actividades;
 use notasController\NotasController;
 
-$notasController = new NotasController();
 
-$actividades = $notasController->read();
+$notasController = new NotasController();
+$codigo = $_GET['codigo'];
+$actividades = $notasController->read($codigo);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -20,15 +23,15 @@ $actividades = $notasController->read();
 
 <body>
     <main>
-        <h1>Lista Notas</h1>
-        <a href="Vista/form_notas.php">Ingresar nueva nota</a>
+        <h1>Notas</h1>
+        <a href="Vista/form_notas.php?codigo=<?php echo $codigo;?>">Ingresar nueva nota</a>
         <table>
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>Descripcion</th>
                     <th>nota</th>
-                    <th>codigoEstudiante</th>
+                    <th>Codigo Estudiante</th>
                 </tr>
             </thead>
             <tbody>

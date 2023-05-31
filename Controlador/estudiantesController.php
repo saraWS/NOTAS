@@ -23,12 +23,9 @@ class EstudiantesController extends BaseController
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);//este metodo es el que me da la respuesta(execSQL), pa ver si hay errores
         $conexiondb->close();
+
         return $resultadoSQL;
-         if($resultadoSQL){
-            return true;
-        }else{
-            return false;
-        }
+         
     }
 
     function read()
@@ -47,8 +44,6 @@ class EstudiantesController extends BaseController
         $conexiondb->close();
         return $estudiante;
     }
-
-    
     
     function readRow($codigo)//se usa para buscar un valor
     {
@@ -69,10 +64,9 @@ class EstudiantesController extends BaseController
     function update($codigo, $estudiantes)//accion modificar
     {
         $sql = 'update estudiantes set ';
-        $sql .= 'name='.$estudiantes->getNombres().'",';
-        $sql .= 'apellido='.$estudiantes->getApellidos().'"';
+        $sql .= 'nombres="'.$estudiantes->getNombres().'",';
+        $sql .= 'apellidos="'.$estudiantes->getApellidos().'"';
         $sql .= ' where codigo='.$codigo;
-        echo $sql;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();

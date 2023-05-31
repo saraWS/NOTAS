@@ -1,5 +1,6 @@
 <?php
 require '../Modelo/actividades.php';
+require '../Modelo/estudiantes.php';
 require '../Controlador/conexionDbController.php';
 require '../Controlador/baseController.php';
 require '../Controlador/notasController.php';
@@ -7,16 +8,20 @@ require '../Controlador/notasController.php';
 use actividades\Actividades;
 use notasController\NotasController;
 
-$id= empty($_GET['id']) ? '' : $_GET['id'];
-$titulo= 'Ingresar Nota';
-$urlAction = "accion_reg_notas.php";
 $actividad = new Actividades();
+$id = empty($_GET['id']) ? '' : $_GET['id'];
+$titulo = 'Ingresar Nota';
+$urlAction = "accion_reg_notas.php?codigoEstudiante=".$actividad->getCodigoEstudiante();
+
 if (!empty($id)){
     $titulo ='Modificar Nota';
     $urlAction = "accion_modif_notas.php";
     $notasController = new NotasController();
     $actividad = $notasController->readRow($id);
+}else{
+    $codigo = $_GET['codigo'];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -29,12 +34,22 @@ if (!empty($id)){
 
 <body>
     <h1><?php echo $titulo; ?></h1>
-    <form action="<?php echo $urlAction;?>" method="post">
-        <label>
-            <span>Id:</span>
-            <input type="number" name="id" min="1" value="<?php echo $actividad->getId(); ?>" required>
-        </label>
-        <br>
+    <form action="<?php echo $urlAction; ?>" method="post">
+        <?php
+        if (!empty($actividad->getId())) {
+            echo '<label>';
+            echo '<span>Id:  ' . $actividad->getId() . '</span>';
+            echo '<input type="hidden" name="id" value="' . $actividad->getId() . '" required >';
+            echo '</label>';
+            echo '<br>';
+        }else{
+            echo'<label>';
+            echo '<span>Id:</span>';
+            echo '<input type="number" name="id" value="' . $actividad->getId() . '" required >';
+            echo '</label>';
+            echo '<br>';
+        }
+        ?>
         <label>
             <span>Descripcion:</span>
             <input type="text" name="descripcion" value="<?php echo $actividad->getDescripcion(); ?>" required>
@@ -42,14 +57,13 @@ if (!empty($id)){
         <br>
         <label>
             <span>Nota:</span>
-            <input type="number" name="nota" value="<?php echo $actividad->getNota(); ?>" required>
+            <input type="number" name="nota" value="<?php echo $actividad->getNota(); ?>" required min="0" max="5">
         </label>
         <br>
         <label>
-            <span>Codigo del estudiante:</span>
-            <input type="text" name="codigoEstudiante" value="<?php echo $actividad->getCodigoEstudiante(); ?>" required>
+            <input type="hidden" name="codigo" value="<?php echo $codigo;?>" required>
         </label>
-        <br>
+        <br> <br>
         <button type="submit">Guardar</button>
     </form>
 </body>
