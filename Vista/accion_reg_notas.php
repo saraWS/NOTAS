@@ -23,4 +23,4 @@ if ($resultado) {
 //EL boton de abajo no sirve :D
 ?>
 
-<a href="../index_notas.php">Volver</a> 
+<a href="../index.php">Volver</a> 
